@@ -22,7 +22,7 @@ pipeline {
            steps {
               
                 sh 'docker build -t samplewebapp:latest .' 
-                sh 'docker tag samplewebapp vijaysh93/samplewebapp:$BUILD_NUMBER'
+                sh 'docker tag samplewebapp vijaysh93/samplewebapp:latest'
                 //sh 'docker tag samplewebapp vijaysh93/samplewebapp:$BUILD_NUMBER'
                
           }
@@ -33,7 +33,7 @@ pipeline {
             steps {
         withDockerRegistry([ credentialsId: "vijaysh93", url: "" ]) {
      
-		sh  'docker push vijaysh93/samplewebapp:$BUILD_NUMBER'
+		sh  'docker push vijaysh93/samplewebapp:latest'
         //  sh  'docker push vijaysh93/samplewebapp:$BUILD_NUMBER' 
         }
                   
@@ -44,7 +44,7 @@ pipeline {
              
             steps 
 			{
-                sh "docker run -d -p 8001:8080 vijaysh93/samplewebapp:$BUILD_NUMBER"
+                sh "docker run -d -p 8001:8080 vijaysh93/samplewebapp:latest"
  
             }
         }
