@@ -44,7 +44,8 @@ pipeline {
              
             steps 
 			{
-                sh "docker run -d -p 8001:8080 vijaysh93/samplewebapp:latest"
+		sh "docker stop $(docker ps -q)"
+                sh "docker run -d --rm -p 8001:8080 vijaysh93/samplewebapp:latest"
  
             }
         }
