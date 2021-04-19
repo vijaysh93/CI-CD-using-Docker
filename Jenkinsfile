@@ -43,10 +43,18 @@ pipeline {
       stage('Run Docker container on Jenkins Agent') {
              
             steps 
-			{
-		sh "docker ps -q | xargs docker stop"
+			{	
+				sh '''
+					#!/bin/bash
+						docker ps -q
+					if [$? -ne 0 ];then
+					docker ps -q | xargs docker stop
+					else
+					exit
+					fi
+					'''
                 sh "docker run -d --rm -p 8001:8080 vijaysh93/samplewebapp:latest"
- 
+ 		
             }
         }
  
