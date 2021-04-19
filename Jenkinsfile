@@ -44,22 +44,10 @@ pipeline {
              
             steps 
 			{	
-				sh '''
-					#!/bin/bash
-					echo "verfying previous builds status"
-					builds=`docker ps -q`
-					if [$builds -ne 0 ];then
-					echo "stopping previous builds"
-					docker stop $builds
-					else
-					echo "running new build"
-					docker run -d --rm -p 8001:8080 vijaysh93/samplewebapp:latest
-					echo "success build"
-					fi
-					'''
+				sh "docker stop tomcat"
+				sh "docker run -d --rm -p 8001:8080 --name="tomcat" vijaysh93/samplewebapp:latest"
             
- 		
-            }
+             }
         }
  
     }
