@@ -45,6 +45,7 @@ pipeline {
             steps 
 			{	
 				sh "docker stop tomcat_test"
+				sh "docker rm tomcat_test"
 				sh "docker run -d --rm -p 8001:8080 --name tomcat_test vijaysh93/samplewebapp:latest"
             
              }
