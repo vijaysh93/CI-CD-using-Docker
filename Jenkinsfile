@@ -47,10 +47,10 @@ pipeline {
 				sh '''
 					#!/bin/bash
 					echo "verfying previous builds status"
-					docker ps -q
-					if [$? -eq 0 ];then
+					builds=`docker ps -q`
+					if [$builds -ne 0 ];then
 					echo "stopping previous builds"
-					docker ps -q | xargs docker stop
+					docker stop $builds
 					else
 					echo "running new build"
 					docker run -d --rm -p 8001:8080 vijaysh93/samplewebapp:latest
