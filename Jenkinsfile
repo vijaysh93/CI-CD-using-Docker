@@ -46,14 +46,17 @@ pipeline {
 			{	
 				sh '''
 					#!/bin/bash
-						docker ps -q
-					if [$? -ne 0 ];then
+					echo "verfying previous builds status"
+					docker ps -q
+					if [$? -eq 0 ];then
+					echo "stopping previous builds"
 					docker ps -q | xargs docker stop
 					else
-					exit
+					echo "running new build"
+					docker run -d --rm -p 8001:8080 vijaysh93/samplewebapp:latest
 					fi
 					'''
-                sh "docker run -d --rm -p 8001:8080 vijaysh93/samplewebapp:latest"
+            
  		
             }
         }
