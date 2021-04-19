@@ -44,8 +44,9 @@ pipeline {
              
             steps 
 			{	
-				sh "docker stop vijaysh93/samplewebapp:expr`$BUILD_NUMBER-1`"
-				sh "docker run -it -d --rm -p 8001:8080 --name tomcat_test vijaysh93/samplewebapp:$BUILD_NUMBER"
+				sh "docker ps -f name=tomcat_test -q | xargs --no-run-if-empty docker container stop"
+				sh "docker conatiner ls -a -f name=tomcat_test -q | xargs -r docker container rm"
+				sh "docker run -it -d -p 8001:8080 --name tomcat_test vijaysh93/samplewebapp:$BUILD_NUMBER"
             
              }
         }
