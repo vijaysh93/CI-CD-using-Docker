@@ -44,7 +44,8 @@ pipeline {
              
             steps 
 			{	
-				
+				sh "docker stop vijaysh93/samplewebapp:$BUILD_NUMBER-1"
+				sh "docker rm vijaysh93/samplewebapp:$BUILD_NUMBER-1"
 				sh "docker run -d -p 8001:8080 --name tomcat_test vijaysh93/samplewebapp:$BUILD_NUMBER"
             
              }
