@@ -54,6 +54,7 @@ pipeline {
 					else
 					echo "running new build"
 					docker run -d --rm -p 8001:8080 vijaysh93/samplewebapp:latest
+					echo "success build"
 					fi
 					'''
             
